@@ -11,3 +11,5 @@ lib
 .idea
 dist
 yarn.lock
+.DS_Store
+yarn-error.log
