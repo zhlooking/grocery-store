@@ -1,12 +1,14 @@
+const path = require('path');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
-    './src/index.jsx'
+    './src/index.jsx',
   ],
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, '/dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -17,20 +19,28 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['react', 'env']
-            }
+              presets: ['react', 'env'],
+            },
           },
-          'eslint-loader'
-        ]
+          'eslint-loader',
+        ],
       }, {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      }, {
+        test: /\.scss$/,
+        use: [
+          // creates style nodes from JS strings
+          // translates CSS into CommonJS
+          // compiles Sass to CSS
+          "style-loader", "css-loader", "sass-loader",
+        ],
+      },
+    ],
   },
   devServer: {
     contentBase: './dist',
-    hot: true
+    hot: true,
   },
-  plugins: []
+  plugins: [],
 }
