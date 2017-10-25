@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-const title = 'this is the minimal test';
+import Apple from './js/components/apple.jsx';
+import './css/index.css';
 
-ReactDom.render(
-  <div>{title}</div>,
-  document.getElementById('app')
-)
+const container = document.getElementById('app');
+
+ReactDom.render(<Apple />, container);
