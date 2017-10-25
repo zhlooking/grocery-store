@@ -5,4 +5,9 @@
     color: aqua;
     font-size: 22px;
   }
+
+  .show-box {
+    display: flex;
+    flex-direction: column;
+  }
 }

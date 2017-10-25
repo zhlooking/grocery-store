@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../css/apple.css';
 
-
 export default class Apple extends React.Component {
   constructor(props) {
     super(props);
