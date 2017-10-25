@@ -55,7 +55,6 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              presets: ['react', 'env'],
             },
           },
           'eslint-loader',

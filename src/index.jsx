@@ -3,8 +3,8 @@ import ReactDom from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './js/components/home.jsx';
-import Apple from './js/components/apple.jsx';
 import Pine from './js/components/pine.jsx';
+import Apple from './js/components/apple.jsx';
 import './css/index.scss';
 
 ReactDom.render((
