@@ -8,6 +8,8 @@ export default () => {
       <ul>
         <li><Link to="/apple">Apple</Link></li>
         <li><Link to="/pine">Pine</Link></li>
+        <li><Link to="/test">Test</Link></li>
+        <li><Link to="/carousel">Carousel</Link></li>
       </ul>
     </div>
   );

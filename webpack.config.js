@@ -74,7 +74,7 @@ module.exports = {
           fallback: "style-loader",
         }),
       }, {
-        test: /\.png|\.jpg|\.gif|\.svg$/,
+        test: /\.png|\.eot|\.ttf|\.woff|\.jpg|\.gif|\.svg$/,
         use: [
           "url-loader?limit=5000&name=img/[name].[hash:8].[ext]",
           {
