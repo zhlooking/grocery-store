@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '../../css/carousel.scss';
+
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -19,12 +21,17 @@ export default class Carousel extends React.Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      autoplay: true,
     };
 
     return (
-      <Slider {...settings}>
-        {this.state.items.map(item => <div key={item}><h3>{item}</h3></div>)}
-      </Slider>
+      <div id="carousel-page">
+        <div className="c-wrapper">
+          <Slider {...settings}>
+            {this.state.items.map(item => <div className='c-item' key={item}><h3>{item}</h3></div>)}
+          </Slider>
+        </div>
+      </div>
     );
   }
 }

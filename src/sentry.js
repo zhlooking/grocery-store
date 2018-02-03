@@ -1,5 +1,8 @@
 import Raven from 'raven-js';
 
+const SENTRYDSN = '';
+const VERSION = '0.0.1';
+
 const configSentry = () => {
   if (!SENTRYDSN) {
     return;
