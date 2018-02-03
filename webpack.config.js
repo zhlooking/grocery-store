@@ -44,6 +44,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     chunkFilename: `[name].${chunkHashPlaceholder}js`,
     filename: `[name].${chunkHashPlaceholder}js`,
+    sourceMapFilename: "[name].js.map",
   },
   module: {
     rules: [
