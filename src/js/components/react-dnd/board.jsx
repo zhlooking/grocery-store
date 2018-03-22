@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Knight from './knight.jsx';
-import Square from './square.jsx';
-import { observe } from './store.js';
+import Knight from './knight';
+import Square from './square';
+import { observe } from './store';
 import '../../../css/dnd.scss';
 
 

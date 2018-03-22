@@ -39,12 +39,18 @@ module.exports = {
   entry: {
     bundle: './src/index.jsx',
   },
+  node: {
+    fs: 'empty',
+  },
   output: {
     publicPath,
     path: path.resolve(__dirname, './dist'),
     chunkFilename: `[name].${chunkHashPlaceholder}js`,
     filename: `[name].${chunkHashPlaceholder}js`,
     sourceMapFilename: "[name].js.map",
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -91,12 +97,16 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
-    historyApiFallback: true,
+    // historyApiFallback: true,
     hot: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/static/, to: '/static' },
+      ],
+    },
   },
   devtool: 'source-map',
   plugins: [
-    new ExtractTextPlugin(`[name].${contentHashPlaceholder}css`),
     new webpack.NamedModulesPlugin(),
     new WebpackChunkHash(),
     new ExtractTextPlugin(`[name].${contentHashPlaceholder}css`),

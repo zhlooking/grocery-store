@@ -11,6 +11,7 @@ export default () => {
         <li><Link to="/test">Test</Link></li>
         <li><Link to="/carousel">Carousel</Link></li>
         <li><Link to="/dnd">ReactDnd</Link></li>
+        <li><Link to="/keras">Keras</Link></li>
       </ul>
     </div>
   );

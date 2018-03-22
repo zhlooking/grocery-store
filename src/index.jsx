@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import configSentry from './sentry.js';
+import configSentry from './sentry';
 
-import Home from './js/components/home.jsx';
-import Pine from './js/components/pine.jsx';
-import Apple from './js/components/apple.jsx';
-import Test from './js/components/test.jsx';
-import Raven from './js/components/raven.jsx';
-import Carousel from './js/components/carousel.jsx';
-import ReactDnd from './js/components/react-dnd/board.jsx';
+import Home from './js/components/home';
+import Pine from './js/components/pine';
+import Apple from './js/components/apple';
+import Test from './js/components/test';
+import Raven from './js/components/raven';
+import Carousel from './js/components/carousel';
+import Keras from './js/keras/keras';
+import ReactDnd from './js/components/react-dnd/board';
 import './index.scss';
 
 ReactDom.render((
@@ -22,6 +23,7 @@ ReactDom.render((
       <Route exact path='/test' component={Test} />
       <Route exact path='/carousel' component={Carousel} />
       <Route exact path='/dnd' component={ReactDnd} />
+      <Route exact path='/keras' component={Keras} />
       <Route exact path='/raven' component={Raven} />
     </div>
   </Router>
