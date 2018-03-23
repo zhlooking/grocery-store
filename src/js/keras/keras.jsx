@@ -82,6 +82,7 @@ export default class Keras extends React.Component {
   predict() {
     const ctx = this.canvasRef.getContext('2d');
     const data = reduceData(ctx.getImageData(0, 0, 280, 280).data);
+    console.log('---> data', data);
     const inputData = {
       input: new Float32Array(data),
     };

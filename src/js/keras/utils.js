@@ -1,5 +1,3 @@
-// import sprintf from 'sprintf';
-
 /* eslint-disable prefer-rest-params,no-mixed-operators,prefer-destructuring */
 export function getMean() {
   let sum = 0;
@@ -37,26 +35,31 @@ export function reduceData(fullData) {
     return gray[x + y * 280];
   }
 
-  // // console.log('----> result', result);
-  // const rowSize = 28;
-  // const temp = split(result, rowSize);
-  // // temp.map((r) => {
-  // //   return r.map((t) => {
-  // //     return t;
-  // //   });
-  // // });
-  // console.log('---->', temp);
-
+  showDataMatrix([...result]);
   return result;
 }
 
-// function split(arr, n) {
-//   const res = [];
-//   while (arr.length) {
-//     res.push(arr.splice(0, n));
-//   }
-//   return res;
-// }
+function showDataMatrix(data) {
+  const rowSize = 28;
+  const temp = split(data, rowSize);
+  const foo = temp.map((r) => {
+    return r.map((t) => {
+      if (t === 0) {
+        return '    ';
+      }
+      return t.toFixed(2);
+    });
+  });
+  console.log('---->', foo);
+}
+
+function split(arr, n) {
+  const res = [];
+  while (arr.length) {
+    res.push(arr.splice(0, n));
+  }
+  return res;
+}
 
 export function getCoordinates(e) {
   let { clientX, clientY } = e;

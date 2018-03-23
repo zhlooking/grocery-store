@@ -1,22 +1,5 @@
 {
   "presets": [
-    "react",
-    ["env", {
-      "targets": {
-        "chrome": 55,
-        "firefox": 51,
-        "node": "current"
-      },
-      "modules": false,
-      "useBuiltIns": true,
-      "debug": false
-    }]
-  ],
-  "plugins": [
-    "transform-class-properties",
-    "transform-object-rest-spread",
-    "transform-decorators-legacy",
-    "transform-runtime",
-    "transform-react-jsx-source",
-  ],
+    "next"
+  ]
 }
