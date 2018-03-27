@@ -11,6 +11,8 @@ import Test from './js/components/test';
 import Raven from './js/components/raven';
 import Carousel from './js/components/carousel';
 import Keras from './js/keras/keras';
+// import Message from './js/components/Context/Message';
+import Message from './js/components/Context/MessageWithContext';
 import ReactDnd from './js/components/react-dnd/board';
 import './index.scss';
 
@@ -25,6 +27,7 @@ ReactDom.render((
       <Route exact path='/dnd' component={ReactDnd} />
       <Route exact path='/keras' component={Keras} />
       <Route exact path='/raven' component={Raven} />
+      <Route exact path='/context' component={Message} />
     </div>
   </Router>
 ), document.getElementById('app'));
