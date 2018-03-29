@@ -95,6 +95,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
     // historyApiFallback: true,
@@ -105,7 +106,6 @@ module.exports = {
       ],
     },
   },
-  devtool: 'source-map',
   plugins: [
     new webpack.NamedModulesPlugin(),
     new WebpackChunkHash(),

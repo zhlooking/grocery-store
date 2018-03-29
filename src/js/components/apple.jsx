@@ -29,7 +29,6 @@ class Apple extends React.Component {
           ...state, dirty: false,
         };
       case EAT.type:
-        console.log('------------> reducer eat type');
         return {
           ...state, remainingBites: Math.max(0, state.remainingBites - action.bites),
         };
@@ -68,3 +67,4 @@ const EAT = { type: 'eat', bites: 2 };
 const ROT = { type: 'rot' };
 
 export default Apple;
+
