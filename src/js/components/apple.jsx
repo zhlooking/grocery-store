@@ -1,70 +1,42 @@
-import { createStore } from 'redux';
 import React from 'react';
+import { connect } from 'react-redux';
+import { wash, eat, rot } from './actions/appleActions';
 
+const state2Props = (store) => ({ ...store.apple });
 
+const dispatch2Props = (dispatch) => {
+  return {
+    actionWash: () => dispatch(wash()),
+    actionEat: () => dispatch(eat()),
+    actionRot: () => dispatch(rot()),
+  };
+};
+
+@connect(state2Props, dispatch2Props)
 class Apple extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = this.initialApple;
-
-    this.appleStore = createStore(this.appleReducer, this.initialApple);
-    this.appleStore.subscribe(this.applyChanges);
-  }
-
-  applyChanges = () => {
-    this.setState(this.appleStore.getState());
-  }
-
-  initialApple = {
-    dirty: true,
-    remainingBites: 5,
-    color: 'red',
-  }
-
-  appleReducer(state = this.initialApple, action) {
-    switch (action.type) {
-      case WASH.type:
-        return {
-          ...state, dirty: false,
-        };
-      case EAT.type:
-        return {
-          ...state, remainingBites: Math.max(0, state.remainingBites - action.bites),
-        };
-      case ROT.type:
-        return {
-          ...state, remainingBites: 0, color: 'brown', dirty: true,
-        };
-      default:
-        return state;
-    }
-  }
-
   render() {
+    const {
+      dirty, remainingBites, color, actionEat, actionWash, actionRot,
+    } = this.props;
     return (
       <div>
         <h3>Apple</h3>
 
-        <div><p>Is Apple Dirty?  <span>{this.state.dirty ? 'Dirty' : 'Clean'}</span></p></div>
-        <div><p>RemainingBites   <span>{this.state.remainingBites}</span></p></div>
-        <div><p>Color            <span>{this.state.color}</span></p></div>
+        <div><p>Is Apple Dirty?  <span>{dirty ? 'Dirty' : 'Clean'}</span></p></div>
+        <div><p>RemainingBites   <span>{remainingBites}</span></p></div>
+        <div><p>Color            <span>{color}</span></p></div>
 
         <div>Options:</div>
         <div>
-          <button onClick={() => this.appleStore.dispatch(WASH)}>wash</button>
-          <button onClick={() => this.appleStore.dispatch(EAT)}>eat</button>
-          <button onClick={() => this.appleStore.dispatch(ROT)}>rot</button>
+          <button onClick={actionWash}>wash</button>
+          <button onClick={actionEat}>eat</button>
+          <button onClick={actionRot}>rot</button>
         </div>
 
       </div>
     );
   }
 }
-
-const WASH = { type: 'wash' };
-const EAT = { type: 'eat', bites: 2 };
-const ROT = { type: 'rot' };
 
 export default Apple;
 

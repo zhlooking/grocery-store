@@ -1,101 +1,35 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { connect } from 'react-redux';
+import { play, sleep, wash, pee, decreaseBall, increaseBall } from './actions/dogActions';
 
+const mapState2Props = (store) => ({ ...store.body, ...store.balls });
+const mapDispatch2Props = (dispatch) => {
+  return {
+    iplay: () => dispatch(play()),
+    iwash: () => dispatch(wash()),
+    isleep: () => dispatch(sleep()),
+    ipee: () => dispatch(pee()),
+    idecreaseBall: () => dispatch(decreaseBall()),
+    iincreaseBall: () => dispatch(increaseBall()),
+  };
+};
 
+@connect(mapState2Props, mapDispatch2Props)
 export default class Dog extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      balls: { ...this.ballsState },
-      body: { ...this.bodyState },
-    };
-    const reducers = combineReducers({
-      balls: this.ballsReducer,
-      body: this.bodyReducer,
-    });
-    this.dogStore = createStore(reducers, {
-      balls: { ...this.ballsState },
-      body: { ...this.bodyState },
-    }, this.genMiddleware());
-    this.dogStore.subscribe(this.handleChange);
-  }
-
-  genMiddleware = () => {
-    const logger = () => next => action => {
-      console.info('action fired', action.type);
-      if (action.type === 'WASH') {
-        if (confirm('Sure to WASH the dog?')) {
-          console.warn('----> action fired WASH', action.type);
-          next(action);
-        }
-      } else {
-        next(action);
-      }
-    };
-
-    const error = () => next => action => {
-      try {
-        next(action);
-      } catch (e) {
-        console.error('Error ', e);
-      }
-    };
-
-    return applyMiddleware(logger, error);
-  }
-
-  ballsState = {
-    balls: 0,
-    name: 'Perry',
-  }
-
-  bodyState = {
-    dirty: false,
-    bodyLevel: 5,
-  }
-
-  bodyReducer = (state = this.bodyState, action) => {
-    console.log('-------> body reducer');
-
-    switch (action.type) {
-      case 'PLAY':
-        return { ...state, dirty: true, bodyLevel: state.bodyLevel + 1 };
-      case 'SLEEP':
-        return { ...state, bodyLevel: state.bodyLevel - 1 };
-      case 'WASH':
-        return { ...state, dirty: false };
-      case 'PEE':
-        throw new Error('uhg, --> pee');
-      default:
-        return state;
-    }
-  }
-
-  ballsReducer = (state = this.ballsState, action) => {
-    console.log('---> balls reducer');
-
-    switch (action.type) {
-      case 'INCREASE':
-        return { ...state, balls: state.balls + 1 };
-      case 'DECREASE':
-        return { ...state, balls: state.balls - 1 };
-      default:
-        return state;
-    }
-  }
-
-  handleChange = () => {
-    const currentState = this.dogStore.getState();
-    console.log('----------> handleChange ', currentState);
-    this.setState({ ...currentState });
-  }
-
   render() {
     const {
-      balls: { name, balls }, body: { dirty, bodyLevel },
-    } = this.state;
+      name,
+      balls,
+      dirty,
+      bodyLevel,
+      iwash,
+      iplay,
+      isleep,
+      ipee,
+      idecreaseBall,
+      iincreaseBall,
+    } = this.props;
 
     return (
       <div className="dog">
@@ -103,12 +37,12 @@ export default class Dog extends React.Component {
         <p>{`balls ${balls}`}</p>
         <p>{`dirty ${dirty}`}</p>
         <p>bodyLevel {bodyLevel}</p>
-        <button onClick={() => this.dogStore.dispatch({ type: 'INCREASE' })}>加球</button>
-        <button onClick={() => this.dogStore.dispatch({ type: 'DECREASE' })}>减球</button>
-        <button onClick={() => this.dogStore.dispatch({ type: 'PLAY' })}>玩耍</button>
-        <button onClick={() => this.dogStore.dispatch({ type: 'WASH' })}>洗澡</button>
-        <button onClick={() => this.dogStore.dispatch({ type: 'SLEEP' })}>睡觉</button>
-        <button onClick={() => this.dogStore.dispatch({ type: 'PEE' })}>suisui</button>
+        <button onClick={iincreaseBall}>加球</button>
+        <button onClick={idecreaseBall}>减球</button>
+        <button onClick={iplay}>玩耍</button>
+        <button onClick={iwash}>洗澡</button>
+        <button onClick={isleep}>睡觉</button>
+        <button onClick={ipee}>suisui</button>
       </div>
     );
   }
